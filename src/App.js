@@ -14,21 +14,24 @@ export default function App() {
   const onSearch = (event, query) => {
     event.preventDefault();
     console.log(query);
-    setSearchQuery(query)
+    setSearchQuery(`${query.type}/?name=${query.name}`)
   }
 
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       `https://rickandmortyapi.com/api/${searchQuery.type}/?name=${searchQuery.name}`
-  //     )
-  //     .then(result => {
-  //       setQueryData(result.data);
-  //     })
-  //     .catch(error => {
-  //       console.log('error in app.js', error);
-  //     });
-  // }, [searchQuery])
+  useEffect(() => {
+    axios
+      .get(
+        // `https://rickandmortyapi.com/api/${searchQuery.type}/?name=${searchQuery.name}`
+        `https://rickandmortyapi.com/api/${searchQuery}`
+      )
+      .then(result => {
+        setQueryData(result.data.results);
+      })
+      .catch(error => {
+        console.log('error in app.js', error);
+      });
+  }, [searchQuery])
+
+  console.log(queryData);
 
   return (
     <main>
@@ -40,11 +43,11 @@ export default function App() {
           onSearch={onSearch}
         />
       </section>
-      {/* <section className='character-list grid-view'>
-        {queryData.map((characterData, index) => (
+      <section className='character-list grid-view'>
+        {queryData && queryData.map((characterData, index) => (
           <CharacterCard key={index} characterData={characterData} />
         ))}
-      </section> */}
+      </section>
     </main>
     )
 }
