@@ -17,18 +17,18 @@ export default function App() {
     setSearchQuery(query)
   }
 
-  useEffect(() => {
-    axios
-      .get(
-        `https://rickandmortyapi.com/api/${searchQuery.type}/?name=${searchQuery.name}`
-      )
-      .then(result => {
-        setQueryData(result.data);
-      })
-      .catch(error => {
-        console.log('error in app.js', error);
-      });
-  }, [searchQuery])
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       `https://rickandmortyapi.com/api/${searchQuery.type}/?name=${searchQuery.name}`
+  //     )
+  //     .then(result => {
+  //       setQueryData(result.data);
+  //     })
+  //     .catch(error => {
+  //       console.log('error in app.js', error);
+  //     });
+  // }, [searchQuery])
 
   return (
     <main>
